@@ -32,6 +32,10 @@ public class Wizard : MonoBehaviour
     [Header("Particles")]
     public ParticleSystem lifeDrain;
 
+    [Header("Sounds")]
+    public AudioClip[] explosions;
+    public AudioClip[] hits;
+
     private void Start()
     {
         spells[0] = new Spell("Force", DamageType.Force);
@@ -74,6 +78,12 @@ public class Wizard : MonoBehaviour
             {
                 GetComponent<Animator>().SetTrigger("Cast");
                 GameObject currentParticle = forceParticles;
+
+                // Sound
+                AudioSource audioSource = GetComponent<AudioSource>();
+                audioSource.clip = hits[Random.Range(0, explosions.Length)];
+                audioSource.Play();
+
 
                 switch (currentSpell)
                 {
@@ -122,6 +132,11 @@ public class Wizard : MonoBehaviour
                     {
                         lifeDrain.Clear();
                         lifeDrain.Play();
+
+                        // Sound
+                        AudioSource audioSource = GetComponent<AudioSource>();
+                        audioSource.clip = explosions[Random.Range(0, explosions.Length)];
+                        audioSource.Play();
                     }
                 }
                 

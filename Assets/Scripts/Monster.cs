@@ -133,9 +133,12 @@ public class Monster : MonoBehaviour
 
         while (Time.time > lastAttack)
         {
-            lastAttack = Time.time + attackSpeed;
-            // Play attack animation
-            wizard.TakeHardDamage(damage);
+            if(!gameController.isPaused)
+            {
+                lastAttack = Time.time + attackSpeed;
+                // Play attack animation
+                wizard.TakeHardDamage(damage);
+            }
             yield return null;
         }
 

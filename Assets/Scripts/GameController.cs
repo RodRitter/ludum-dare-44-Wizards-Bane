@@ -55,6 +55,7 @@ public class GameController : MonoBehaviour
 
     public void EndGame()
     {
+        GetComponent<AudioSource>().Stop();
         endGameScoreText.text = "Score: "+FindObjectOfType<Wizard>().score.ToString();
         isPaused = true;
         endGamePanel.SetActive(true);
